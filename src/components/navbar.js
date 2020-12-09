@@ -1,5 +1,6 @@
-import React from "react"
+import React, { useContext } from "react"
 import {  navigate } from "gatsby"
+import { Context } from "../context"
 
 const routes = [
   {label: "Home", path: "/"},
@@ -8,21 +9,26 @@ const routes = [
   {label: "Contact", path: "/contact"}
 ]
 
-const Navbar = ({location}) => {
-  
+const Navbar = () => {
+  const {globalContext, setGlobalContext} = useContext(Context)
+
   function onBeforeNavigate(e,to) {
     e.preventDefault()
 
-    if (to === location.pathname) {
+    if (to === globalContext.location) {
       return
     }
 
-    let curr = routes.findIndex(obj => obj.path === location.pathname)
+    let curr = routes.findIndex(obj => obj.path === globalContext.location)
     let next = routes.findIndex(obj => obj.path === to)
 
-    console.log(curr + " -> " + next)
-    console.log(location.pathname + " -> " + to)
-    console.log(next > curr ? "right" : "left")
+    //console.log(curr + " -> " + next)
+    //console.log(globalContext.location + " -> " + to)
+    //console.log(next > curr ? "right" : "left")
+
+    setGlobalContext(prev => ({
+      ...prev, direction: next > curr ? 1 : -1
+    }))
     
     navigate(to)
   }

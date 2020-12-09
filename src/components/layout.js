@@ -3,6 +3,7 @@ import "../style.css"
 import { AnimatePresence } from "framer-motion"
 import Navbar from "./navbar"
 import { Context } from "../context"
+import Transition from "./transition"
 
 const Layout = ({children, location}) => {
   const [globalContext, setGlobalContext] = useState({
@@ -18,12 +19,12 @@ const Layout = ({children, location}) => {
 
   return (
     <Context.Provider value={{ globalContext, setGlobalContext }}>
-      <AnimatePresence initial={false}>
-        <main>
-          <Navbar location={location}/>
+      <main>
+        <Navbar/>
+        <Transition>
           {children}
-        </main>
-      </AnimatePresence>
+        </Transition>
+      </main>
     </Context.Provider>
   )
 }
