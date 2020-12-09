@@ -16,7 +16,9 @@
   },
   "license": "0BSD",
   "dependencies": {
+    "framer-motion": "^2.9.5",
     "gatsby": "^2.26.1",
+    "gatsby-plugin-layout": "^1.6.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
   }
