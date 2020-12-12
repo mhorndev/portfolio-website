@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react"
-import "../style.css"
-import Navbar from "./navbar"
+import { navigate } from "gatsby"
 import { Context } from "../context"
 import Transition from "./transition"
-import { navigate } from "gatsby"
-import Drawer from "./drawer"
 import routes from "./routes"
+import Navbar from "./navbar"
+import Drawer from "./drawer"
+import "../style.css"
 
 const Layout = ({children, location}) => {
   const [globalContext, setGlobalContext] = useState({
@@ -59,9 +59,7 @@ const Layout = ({children, location}) => {
       <main>
         <Navbar/>
         <Drawer/>
-        <Transition>
-          {children}
-        </Transition>
+        <Transition>{children}</Transition>
       </main>
     </Context.Provider>
   )
