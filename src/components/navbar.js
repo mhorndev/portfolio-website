@@ -1,107 +1,61 @@
 import React, { useContext } from "react"
-import {  navigate } from "gatsby"
+import Brand from "./brand"
+import Burger from "./burger"
 import { Context } from "../context"
+import { AnimatePresence, motion } from "framer-motion"
 
-const routes = [
-  {label: "Home", path: "/"},
-  {label: "About", path: "/about"},
-  {label: "Projects", path: "/projects"},
-  {label: "Contact", path: "/contact"}
-]
+const variants = {
+  initial: {
+    y: "-60px"
+  },
+  animate: {
+    y: 0
+  },
+  exit: {
+    y: "-60px"
+  }
+}
 
 const Navbar = () => {
-  const {globalContext, setGlobalContext} = useContext(Context)
-
-  function onBeforeNavigate(e,to) {
-    e.preventDefault()
-
-    if (to === globalContext.location) {
-      return
-    }
-
-    let curr = routes.findIndex(obj => obj.path === globalContext.location)
-    let next = routes.findIndex(obj => obj.path === to)
-
-    //console.log(curr + " -> " + next)
-    //console.log(globalContext.location + " -> " + to)
-    //console.log(next > curr ? "right" : "left")
-
-    setGlobalContext(prev => ({
-      ...prev, direction: next > curr ? 1 : -1
-    }))
-    
-    navigate(to)
-  }
-
-  //console.log(location)
+  const { globalContext, setGlobalContext } = useContext(Context)
 
   return (
-    <nav>
-      {routes.map((route,index) => {
-        return(
-          <a 
-            key={route.path} 
-            href={route.path}
-            onClick={e => onBeforeNavigate(e,route.path)}
-          >
-            {route.label}
-          </a>
-        )
-      })}
-    </nav>
+    <AnimatePresence initial={false}>
+      {globalContext.navbarOpen && (
+        <motion.div 
+          id="navbar"
+          key="navbar"
+          initial="initial"
+          animate="animate"
+          exit="exit"
+          variants={variants}
+          transition={{ ease: "anticipate", duration: .5 }}
+        >
+          <nav>
+            <Brand/>
+            <Burger/>
+          </nav>
+        </motion.div>
+      )}
+    </AnimatePresence>
   )
 }
 
 export default Navbar
 
 /*
-Polyfill for IE
+          <Burger/>
 
-https://tc39.github.io/ecma262/#sec-array.prototype.findindex
-
-if (!Array.prototype.findIndex) {
-  Object.defineProperty(Array.prototype, 'findIndex', {
-    value: function(predicate) {
-     // 1. Let O be ? ToObject(this value).
-      if (this == null) {
-        throw new TypeError('"this" is null or not defined');
-      }
-
-      var o = Object(this);
-
-      // 2. Let len be ? ToLength(? Get(O, "length")).
-      var len = o.length >>> 0;
-
-      // 3. If IsCallable(predicate) is false, throw a TypeError exception.
-      if (typeof predicate !== 'function') {
-        throw new TypeError('predicate must be a function');
-      }
-
-      // 4. If thisArg was supplied, let T be thisArg; else let T be undefined.
-      var thisArg = arguments[1];
-
-      // 5. Let k be 0.
-      var k = 0;
-
-      // 6. Repeat, while k < len
-      while (k < len) {
-        // a. Let Pk be ! ToString(k).
-        // b. Let kValue be ? Get(O, Pk).
-        // c. Let testResult be ToBoolean(? Call(predicate, T, « kValue, k, O »)).
-        // d. If testResult is true, return k.
-        var kValue = o[k];
-        if (predicate.call(thisArg, kValue, k, o)) {
-          return k;
-        }
-        // e. Increase k by 1.
-        k++;
-      }
-
-      // 7. Return -1.
-      return -1;
-    },
-    configurable: true,
-    writable: true
-  });
-}
+          {routes.map((route,index) => {
+            return(
+              <a 
+                key={route.path} 
+                href={route.path}
+                onClick={e => globalContext.navigate(e,route.path)}
+              >
+                {route.label}
+              </a>
+            )
+          })}
 */
+

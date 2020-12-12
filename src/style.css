@@ -25,16 +25,75 @@ main {
   background-color: #FFF;
 }
 
-nav {
+#navbar, nav {
+
+}
+
+#navbar {
   top: 0;
   left: 0;
   right: 0;
   height: 60px;
-  z-index: 2;
+  z-index: 10;
   position: fixed;
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: #FFF;
+}
+
+nav {
+  width: 100%;
+  height: 100%;
+  max-width: 1200px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#brand, #burger {
+  padding: 10px;
+  cursor: pointer;
+}
+
+#burger div {
+  height: 19px;
+  width: 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+#drawer {
+  width: 100%;
+  height: 100%;
+  z-index: 9;
+  position: fixed;
+  background-color: #FFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#drawer-links {
+  display: flex;
+  flex-direction: column;
+}
+
+#drawer-links a {
+  color: #000;
+  font-size: 4vh;
+  text-decoration: none;
+  transition: color 250ms ease;
+}
+
+#drawer-links a:hover {
+  color: #639;
+}
+
+#drawer-links .current {
+  color: #999;
 }
 
 nav a {

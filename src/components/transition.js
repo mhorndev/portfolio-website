@@ -14,7 +14,8 @@ const variants = {
     }
   },
   center: {
-    transform: "translateX(0%) rotateY(0deg)"
+    transformOrigin: "left",
+    transform: "translateX(0%) rotateY(0deg)" 
   },
   exit: (direction) => {
     return {
@@ -31,18 +32,28 @@ const variants = {
 const Transition = ({children}) => {
   const {globalContext, setGlobalContext} = useContext(Context)
 
-  console.log(children)
+  function onAnimationComplete() {
+    console.log("anim complete")
+    setGlobalContext(prev => ({
+      ...prev, transitionCompleted: true,
+    }))
+  }
+
   return (
-    <AnimatePresence initial={false} custom={globalContext.direction}>
+    <AnimatePresence 
+      initial={false} 
+      custom={globalContext.direction}>
+
       <motion.div
         id="page"
         key={children.key}
-        custom={globalContext.direction}
-        variants={variants}
         initial="enter"
         animate="center"
         exit="exit"
-        transition={{ duration: .75 }}
+        variants={variants}
+        custom={globalContext.direction}
+        onAnimationComplete={onAnimationComplete}
+        transition={{ duration: .75, ease: "anticipate" }}
       >
         {children}
       </motion.div>
