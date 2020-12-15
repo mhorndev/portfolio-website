@@ -50,7 +50,7 @@ const Drawer = () => {
                     transition={{
                       ease: "easeOut",
                       duration: .25, 
-                      delay: .25 + index * .1 
+                      delay: .5 + index * .1 
                     }}
                     onClick={e => {
                       e.preventDefault()

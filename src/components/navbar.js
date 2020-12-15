@@ -42,20 +42,3 @@ const Navbar = () => {
 }
 
 export default Navbar
-
-/*
-          <Burger/>
-
-          {routes.map((route,index) => {
-            return(
-              <a 
-                key={route.path} 
-                href={route.path}
-                onClick={e => globalContext.navigate(e,route.path)}
-              >
-                {route.label}
-              </a>
-            )
-          })}
-*/
-

@@ -16,19 +16,6 @@ main {
   background-color: #000;
 }
 
-#page {
-  top: 0; 
-  left:0; 
-  bottom: 0;
-  right: 0; 
-  position: fixed;
-  background-color: #FFF;
-}
-
-#navbar, nav {
-
-}
-
 #navbar {
   top: 0;
   left: 0;
@@ -49,6 +36,7 @@ nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  background-color: whitesmoke;
 }
 
 #brand, #burger {
@@ -115,4 +103,63 @@ nav a:hover {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+section {
+  width: 100%;
+  height: 100%;
+  max-width: 1200px;
+  display: flex;
+  align-items: center;
+}
+
+#about {
+
+}
+
+#navbar {
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  z-index: 10;
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #FFF;
+}
+
+nav {
+  width: 100%;
+  height: 100%;
+  max-width: 1200px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#page {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding-top: 60px;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #FFF;
+}
+
+#page h1 {
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+
+#page span {
+  content: "";
+  height: 3px;
+  width: 50px;
+  background-color: salmon;
 }
